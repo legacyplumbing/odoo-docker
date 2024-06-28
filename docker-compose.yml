@@ -52,7 +52,6 @@ services:
         condition: service_healthy
         restart: true
     image: "rubencabrera/odoo-docker:16.0.5"
-    image: "odoo16-local:4"
     ports: 
       - "8069:8069"
       - "8071:8071"
