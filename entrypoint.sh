@@ -57,9 +57,6 @@ set -e
 : ${XMLRPC_PORT:="8069"}
 : ${XMLRPCS:="True"}
 : ${XMLRPCS_PORT:="8071"}
-# Estas no las estabamos metiendo:
- ## echo 'logfile = '${LOGFILE:-"/var/log/odoo/odoo-server.log"} >> /opt/config/odoo-server.conf; \
- ## echo 'pg_path = '${PG_PATH:-None} >> /opt/config/odoo-server.conf; \
 
 function write_conf() {
   param="$1"
