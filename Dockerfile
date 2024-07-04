@@ -1,7 +1,5 @@
 # DOCKER image to run odoo 16 with Odoo Community Backports and OCA addons
 
-# WARNING: No work done yet for 16, this is a dummy release to keep track of
-# it and move onto 16. Do not use.
 FROM rubencabrera/odoo-base-image:16.0.1
 MAINTAINER Rubén Cabrera Martínez <dev@rubencabrera.es>
 EXPOSE 8069 8071 8072
@@ -10,15 +8,12 @@ ENV LANG C.UTF-8
 RUN mkdir /opt/odoo; \
     mkdir /var/log/odoo; \
     mkdir /var/lib/odoo; \
-    mkdir /opt/repos; \
     mkdir -p /opt/repos/oca; \
     mkdir -p /opt/repos/other
 RUN useradd --home /opt/odoo --shell /bin/bash odoo
 RUN chown -R odoo:odoo /opt/odoo; chown -R odoo:odoo /var/lib/odoo; \
     chown -R odoo:odoo /var/log/odoo; chown -R odoo:odoo /opt/repos
 
-# Con lo siguiente, cambiamos al usuario odoo y el path donde ejecuta los
-# comandos que se indiquen después.
 USER odoo
 WORKDIR /opt/odoo
 RUN git clone --branch 16.0 --depth 1 https://github.com/oca/ocb.git /opt/odoo
@@ -90,7 +85,7 @@ WORKDIR /opt
 USER root
 RUN mkdir /opt/config
 COPY ./odoo-server.conf /opt/config/odoo-server.conf
-ENV OPENERP_SERVER /opt/config/odoo-server.conf
+ENV OPENERP_SERVER_CONF /opt/config/odoo-server.conf
 
 RUN chown -R odoo:odoo /opt/config
 RUN sed -i '/^#.*Storage/s/^#//' /etc/systemd/journald.conf

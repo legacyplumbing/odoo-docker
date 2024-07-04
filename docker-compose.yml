@@ -51,24 +51,28 @@ services:
       db:
         condition: service_healthy
         restart: true
-    image: "rubencabrera/odoo-docker:16.0.5"
+    environment:
+      - DB_FILTER=.*
+    image: "rubencabrera/odoo-docker:16.1.0"
     ports: 
       - "8069:8069"
       - "8071:8071"
       - "8072:8072"
     restart: always
     volumes:
-      - code_volume:/opt
+      - code_volume:/opt/repos
       - odoo_data:/var/lib/odoo
 volumes:
   code_volume:
-    # This is where the code will live.
+    # This is where the code will live. For local development, you might want
+    # to use something owned by your user.
     driver: local
     driver_opts:
       o: bind
       type: none
-      # FIXME: The local paths need to exist for volumes to be mounted
-      device: ${ODOO_DOCKER_OPT_HOST_PATH:-${HOME}/.odoo_docker_opt}
+      # FIXME: The local paths need to exist for volumes to be mounted.
+      #     For prod environments, this might be better inside a dir in `/opt`
+      device: ${ODOO_DOCKER_REPOS_HOST_PATH:-${HOME}/.${COMPOSE_PROJECT_NAME}_repos}
     name: ${COMPOSE_PROJECT_NAME}_code
   data_storage:
     name: ${COMPOSE_PROJECT_NAME}_data_storage

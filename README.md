@@ -26,9 +26,17 @@ be much better with something above 4GB.
 
 ## Running with docker-compose
 
-Run `docker-compose up` in the root path. 
+1. Set the environment variables used in `docker-compose.yml` to
+configure how docker compose will behave:
+`ODOO_DOCKER_PROJECT_NAME` and `ODOO_DOCKER_REPOS_HOST_PATH`.
+1. Review other `FIXME`s in that same file (like creating or setting the path
+for your code volume).
+1. Set other environment variables in the odoo16 container for the Odoo server
+config (see section below, look at `DB_FILTER` especially for local
+ development).
+1. Run `docker-compose up` in the root path.
 
-## Environment variables
+## Odoo server config using environment variables
 
 Odoo uses a config file that is a bit of a pain with a docker 
 container. This images allow you to pass those config values in
@@ -38,41 +46,37 @@ same name in lower case:
 
 | ENV var | Default value |
 | --- | --- |
-| `ODOO_DB_USER` | `odoo` |
-| `LOG_HANDLER` | `"[':INFO']"` |
-| `LOG_LEVEL` | `info` |
-| `LOG_DB` | `False` |
-| `LOGFILE` | `"/var/log/odoo"` |
-| `LOGROTATE` | `True` |
-| `CSV_INTERNAL_SEP` | `";"` |
 | `ADMIN_PASSWD` | `admin` |
-| `DB_HOST` | `localhost` |
-| `DB_PORT` | `5432` |
-| `DB_USER` | `odoo` |
-| `DB_PASSWORD` | `odoo` |
-| `DB_TEMPLATE` | `template1` |
-| `DB_NAME` | `False` |
-| `DB_MAXCONN` | `64` |
+| `CSV_INTERNAL_SEP` | `";"` |
+| `DATA_DIR` | `/var/lib/odoo` |
+| `DB_HOST` | `db` |
 | `DB_FILTER` | `"^%d"` |
 | `DB_MAXCONN` | `64` |
+| `DB_NAME` | `False` |
+| `DB_PASSWORD` | `odoo` |
+| `DB_PORT` | `5432` |
+| `DB_USER` | `odoo` |
+| `DB_TEMPLATE` | `template1` |
 | `DEBUG_MODE` | `False` |
 | `EMAIL_FROM` | `False` |
+| `GEVENT_PORT` | `8072` |
 | `LIMIT_MEMORY_HARD` | `2684354560` |
 | `LIMIT_MEMORY_SOFT` | `2147483648` |
 | `LIMIT_REQUEST` | `8192` |
 | `LIMIT_TIME_CPU` | `60` |
 | `LIMIT_TIME_REAL` | `120` |
 | `LIST_DB` | `True` |
-| `LONGPOLLING_PORT` | `8072` |
+| `LOG_DB` | `False` |
+| `LOG_HANDLER` | `"[':INFO']"` |
+| `LOG_LEVEL` | `info` |
+| `LOGROTATE` | `True` |
 | `MAX_CRON_THREADS` | `2` |
-| `OSV_MEMORY_AGE_LIMIT` | `1` |
 | `OSV_MEMORY_COUNT_LIMIT` | `False` |
-| `PG_PATH` | `None` |
 | `PIDFILE` | `None` |
 | `PROXY_MODE` | `False` |
 | `REPORTGZ` | `False` |
 | `SECURE_CERT_FILE` | `"server.cert"` |
-| `SECURE_pkey_FILE` | `"server.pkey"` |
+| `SECURE_PKEY_FILE` | `"server.pkey"` |
 | `SERVER_WIDE_MODULES` | `None` |
 | `SMTP_PASSWORD` | `False` |
 | `SMTP_PORT` | `25` |
@@ -85,6 +89,7 @@ same name in lower case:
 | `TEST_FILE` | `False` |
 | `TEST_REPORT_DIRECTORY` | `False` |
 | `TIMEZONE` | `False` |
+| `TRANSIENT_AGE_LIMIT` | `1` |
 | `TRANSLATE_MODULES` | `"['all']"` |
 | `UNACCENT` | `True` |
 | `WITHOUT_DEMO` | `True` |
