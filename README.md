@@ -26,9 +26,17 @@ be much better with something above 4GB.
 
 ## Running with docker-compose
 
-Run `docker-compose up` in the root path. 
+1. Set the environment variables used in `docker-compose.yml` to
+configure how docker compose will behave:
+`ODOO_DOCKER_PROJECT_NAME` and `ODOO_DOCKER_REPOS_HOST_PATH`.
+1. Review other `FIXME`s in that same file (like creating or setting the path
+for your code volume).
+1. Set other environment variables in the odoo16 container for the Odoo server
+config (see section below, look at `DB_FILTER` especially for local
+ development).
+1. Run `docker-compose up` in the root path.
 
-## Environment variables
+## Odoo server config using environment variables
 
 Odoo uses a config file that is a bit of a pain with a docker 
 container. This images allow you to pass those config values in
