@@ -47,10 +47,10 @@ same name in lower case:
 | ENV var | Default value |
 | --- | --- |
 | `ADMIN_PASSWD` | `admin` |
-| `CSV_INTERNAL_SEP` | `";"` |
+| `CSV_INTERNAL_SEP` | `;` |
 | `DATA_DIR` | `/var/lib/odoo` |
 | `DB_HOST` | `db` |
-| `DB_FILTER` | `"^%d"` |
+| `DB_FILTER` | `^%d` |
 | `DB_MAXCONN` | `64` |
 | `DB_NAME` | `False` |
 | `DB_PASSWORD` | `odoo` |
@@ -67,7 +67,7 @@ same name in lower case:
 | `LIMIT_TIME_REAL` | `120` |
 | `LIST_DB` | `True` |
 | `LOG_DB` | `False` |
-| `LOG_HANDLER` | `"[':INFO']"` |
+| `LOG_HANDLER` | `[':INFO']` |
 | `LOG_LEVEL` | `info` |
 | `LOGROTATE` | `True` |
 | `MAX_CRON_THREADS` | `2` |
@@ -75,8 +75,8 @@ same name in lower case:
 | `PIDFILE` | `None` |
 | `PROXY_MODE` | `False` |
 | `REPORTGZ` | `False` |
-| `SECURE_CERT_FILE` | `"server.cert"` |
-| `SECURE_PKEY_FILE` | `"server.pkey"` |
+| `SECURE_CERT_FILE` | `server.cert` |
+| `SECURE_PKEY_FILE` | `server.pkey` |
 | `SERVER_WIDE_MODULES` | `None` |
 | `SMTP_PASSWORD` | `False` |
 | `SMTP_PORT` | `25` |
@@ -90,7 +90,7 @@ same name in lower case:
 | `TEST_REPORT_DIRECTORY` | `False` |
 | `TIMEZONE` | `False` |
 | `TRANSIENT_AGE_LIMIT` | `1` |
-| `TRANSLATE_MODULES` | `"['all']"` |
+| `TRANSLATE_MODULES` | `['all']` |
 | `UNACCENT` | `True` |
 | `WITHOUT_DEMO` | `True` |
 | `WORKERS` | `0` |
