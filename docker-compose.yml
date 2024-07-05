@@ -52,8 +52,9 @@ services:
         condition: service_healthy
         restart: true
     environment:
+      # FIXME: might want to remove this for prod.
       - DB_FILTER=.*
-    image: "rubencabrera/odoo-docker:16.1.0"
+    image: "rubencabrera/odoo-docker:16.1.1"
     ports: 
       - "8069:8069"
       - "8071:8071"

@@ -36,6 +36,22 @@ config (see section below, look at `DB_FILTER` especially for local
  development).
 1. Run `docker-compose up` in the root path.
 
+### Developing using this image
+
+With the provided `docker-compose.yml`, all the repos will be in the code
+volume, named using the environment variable `$ODOO_DOCKER_PROJECT_NAME`
+(with a default value of `odoo_docker`).
+
+The docker compose volume with the code configured in the given
+`docker-compose.yml` will need an existing **empty** directory where the repos
+will be cloned. The default path is
+`${HOME}/.${ODOO_DOCKER_PROJECT_NAME}_repos` and can be overriden by setting
+the `$ODOO_DOCKER_REPOS_HOST_PATH` (to an existing empty directory) before
+running `docker-compose up`.
+
+The repos are all cloned using git with `--depth=1`, so can be worked as any
+other git repo.
+
 ## Odoo server config using environment variables
 
 Odoo uses a config file that is a bit of a pain with a docker 
