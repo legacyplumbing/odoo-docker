@@ -44,13 +44,36 @@ volume, named using the environment variable `$ODOO_DOCKER_PROJECT_NAME`
 
 The docker compose volume with the code configured in the given
 `docker-compose.yml` will need an existing **empty** directory where the repos
-will be cloned. The default path is
-`${HOME}/.${ODOO_DOCKER_PROJECT_NAME}_repos` and can be overriden by setting
-the `$ODOO_DOCKER_REPOS_HOST_PATH` (to an existing empty directory) before
-running `docker-compose up`.
+will be cloned (if not empty, the content will be mounted as is). The default
+path is `${HOME}/.${ODOO_DOCKER_PROJECT_NAME}_repos` and can be overriden by
+setting the `$ODOO_DOCKER_REPOS_HOST_PATH` (to an existing empty directory)
+before running `docker-compose up`.
 
 The repos are all cloned using git with `--depth=1`, so can be worked as any
 other git repo.
+
+#### Debugging
+
+[pudb][pudb] is now included in the base image. To insert a breaking point add
+these lines of code to where you'll need to look into:
+
+```python
+from pudb.remote import set_trace
+set_trace(host='0.0.0.0')
+```
+
+The `6899` port will need to be open (see the docker-compose).
+
+Then run the container again, get it to hit the breaking point where the
+`set_trace` is and connect with:
+
+```
+telnet 127.0.0.1 6899
+```
+
+And it will open the terminal debugger. See [upstream docs][pudb] for more
+details.
+
 
 ## Odoo server config using environment variables
 
@@ -136,3 +159,4 @@ por ayudar.
 
 [issue-link]: https://github.com/rubencabrera/odoo-docker/issues/new
 [compose-install]: https://docs.docker.com/compose/install/]
+[pudb]: https://documen.tician.de/pudb/index.html

@@ -1,6 +1,6 @@
 # DOCKER image to run odoo 16 with Odoo Community Backports and OCA addons
 
-FROM rubencabrera/odoo-base-image:16.0.1
+FROM rubencabrera/odoo-base-image:16.1.0
 MAINTAINER Rubén Cabrera Martínez <dev@rubencabrera.es>
 EXPOSE 8069 8071 8072
 ENV LANG C.UTF-8

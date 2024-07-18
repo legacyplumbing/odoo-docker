@@ -46,16 +46,18 @@ services:
     # command: ["/opt/odoo/odoo-bin", "-d", "${DATABASE_NAME}", "-u", "module_to_update"]
     # command: ["/opt/odoo/odoo-bin", "-d", "${DATABASE_NAME}", "-u", "all"]
     #
-    container_name: ${COMPOSE_PROJECT_NAME}_odoo16
+    container_name: ${COMPOSE_PROJECT_NAME}_odoo16_pudb
     depends_on:
       db:
         condition: service_healthy
         restart: true
     environment:
-      # FIXME: might want to remove this for prod.
+      # FIXME: might want to remove or make this more specific for prod.
       - DB_FILTER=.*
-    image: "rubencabrera/odoo-docker:16.1.1"
+    # image: "rubencabrera/odoo-docker:16.1.1"
+    image: "odoo-docker-pudb"
     ports: 
+      - "6899:6899"  # pudb telnet port
       - "8069:8069"
       - "8071:8071"
       - "8072:8072"
@@ -63,6 +65,7 @@ services:
     volumes:
       - code_volume:/opt/repos
       - odoo_data:/var/lib/odoo
+      - upstream_volume:/opt/odoo
 volumes:
   code_volume:
     # This is where the code will live. For local development, you might want
@@ -79,3 +82,14 @@ volumes:
     name: ${COMPOSE_PROJECT_NAME}_data_storage
   odoo_data:
     name: ${COMPOSE_PROJECT_NAME}_odoo_data
+  upstream_volume:
+    # Odoo main code. This volume should only be needed for upstream
+    # contributions.
+    driver: local
+    driver_opts:
+      o: bind
+      type: none
+      # FIXME: The local paths need to exist for volumes to be mounted.
+      #     For prod environments, this might be better inside a dir in `/opt`
+      device: ${ODOO_DOCKER_UPSTREAM_HOST_PATH:-${HOME}/.${COMPOSE_PROJECT_NAME}_upstream}
+    name: ${COMPOSE_PROJECT_NAME}_upstream
