@@ -54,8 +54,7 @@ services:
     environment:
       # FIXME: might want to remove or make this more specific for prod.
       - DB_FILTER=.*
-    # image: "rubencabrera/odoo-docker:16.1.1"
-    image: "odoo-docker-pudb"
+    image: "rubencabrera/odoo-docker:16.2.0"
     ports: 
       - "6899:6899"  # pudb telnet port
       - "8069:8069"
