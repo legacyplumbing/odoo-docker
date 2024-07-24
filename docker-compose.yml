@@ -46,7 +46,7 @@ services:
     # command: ["/opt/odoo/odoo-bin", "-d", "${DATABASE_NAME}", "-u", "module_to_update"]
     # command: ["/opt/odoo/odoo-bin", "-d", "${DATABASE_NAME}", "-u", "all"]
     #
-    container_name: ${COMPOSE_PROJECT_NAME}_odoo16_pudb
+    container_name: ${COMPOSE_PROJECT_NAME}_odoo16
     depends_on:
       db:
         condition: service_healthy
